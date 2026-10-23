@@ -3,6 +3,8 @@
 Goal: 50 entries. Seed set below. Add one per PR, keep the format.
 Format per entry: `bad` / profile / `fixed`. Fixed prompts follow the profile rules.
 
+See CONTRIBUTING.md for what a good fixture must cover.
+
 ## ste80
 
 1. bad: "hey can u tell me about websocket vs sse thx"
@@ -63,3 +65,24 @@ Format per entry: `bad` / profile / `fixed`. Fixed prompts follow the profile ru
 
 14. bad: "summarize this" (no attachment)
     expected skill behavior: ask one question naming the missing input.
+
+## first-PR additions (PRs #15-#20)
+
+15. bad: "refactor the whole codebase and also write docs and also fix that bug idk which one"
+    expected skill behavior: multi-intent. Do not cram into one prompt. Show one fixed prompt per task (3 prompts), each under 150 words, each name its one job.
+
+16. bad: a 200-line code blob pasted inline + "explain this"
+    expected skill behavior: reference the code by attachment, do not inline it. fixed: "Explain the attached module. Do not restate the code. Data flow as bullets. Public API surface in one table. Max 200 words. Follow ste80."
+
+17. bad: "explique moi la difference entre git rebase et merge c urgent"
+    expected skill behavior: keep the user's language. fixed (French): "Explique la difference entre git rebase et git merge. Un tableau, 5 lignes max. Seul ton en francais. Max 200 mots."
+
+18. bad: "List the breaking changes in v2.0. One bullet per change. Max 100 words. Cite the changelog file."
+    expected skill behavior: prompt is already good. Say so in one sentence. Do not invent problems.
+
+19. bad: "prod dustu ne yapiyoruz acil"
+    profile: tr + cte.
+    fixed: "Bir incident runbooku yaz. Turkce. Yapi: purpose, prerequisites, steps (her adimda 1 aksiyon, emir kipi), verification, rollback. Tehlikeli adimdan once uyari. Max 15 kelime/cumle."
+
+20. bad: "explain in full detail, max 10 words"
+    expected skill behavior: contradictory constraints. Ask one question: "Which wins: depth or the 10-word cap?" Do not pick silently.
