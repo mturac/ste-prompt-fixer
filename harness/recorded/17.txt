@@ -1,0 +1,5 @@
+Format : texte simple.
+
+```
+Explique la difference entre git rebase et git merge. Un tableau, 5 lignes max. Une recommandation finale en une phrase. Max 200 mots.
+```

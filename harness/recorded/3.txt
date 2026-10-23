@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Describe the new API for a blog post. Audience: backend devs. List exactly 3 changes and each one's user benefit. No superlatives. Max 150 words.
+```

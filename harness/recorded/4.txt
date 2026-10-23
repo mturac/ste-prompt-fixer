@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Write a procedure to migrate the Postgres DB to the new host. Include: prerequisites, steps with one action each, verification command, rollback. Warning before any data-touching step.
+```

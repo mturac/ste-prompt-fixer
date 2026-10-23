@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Blog yazisi icin giris metni yaz. Turkce. En fazla 15 kelime/cumle. 'Son derece' ve 'dinamik' gibi bos sifatlar yok. Sayilar rakamla. Teknik terimler Ingilizce kalsin. Max 200 kelime.
+```

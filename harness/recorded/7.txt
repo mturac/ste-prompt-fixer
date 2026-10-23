@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Write the changelog for v2.3. Max 20 words per sentence. Everyday words; define any jargon inline. One line per change: what it is, who benefits.
+```

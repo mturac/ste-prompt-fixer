@@ -1,0 +1,5 @@
+The module is long. Reference it as an attachment instead of pasting.
+
+```
+Explain the attached module. Do not restate the code. Data flow as bullets. Public API surface in one table. Max 200 words. Follow ste80.
+```

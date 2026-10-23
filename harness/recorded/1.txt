@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Compare WebSocket and SSE. One table, 5 rows max, latency and use case columns. End with one verdict sentence. Max 200 words.
+```

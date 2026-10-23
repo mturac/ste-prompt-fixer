@@ -1,0 +1,13 @@
+These are three separate jobs. Here is one prompt per job, in order.
+
+```
+Refactor src/auth/: extract token handling into auth/tokens.ts. Keep public API stable. Add one test per moved function. Follow AGENTS.md.
+```
+
+```
+Write docs for the public API of src/auth/. One section per exported function: name, signature, one example, one gotcha. Max 400 words.
+```
+
+```
+State which bug you mean: file, observed behavior, expected behavior. Then ask me to fix it. Do not guess the bug from the codebase.
+```

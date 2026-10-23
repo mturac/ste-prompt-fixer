@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Bir incident runbooku yaz. Turkce. Yapi: purpose, prerequisites, steps (her adimda 1 aksiyon, emir kipi), verification, rollback. Tehlikeli adimdan once uyari. Max 15 kelime/cumle.
+```

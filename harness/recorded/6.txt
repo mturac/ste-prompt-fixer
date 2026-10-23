@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Write onboarding docs for hires in Indonesia and Vietnam. Common international English only, 1500-word ceiling. No idioms. Max 15 words/sentence. Dates ISO. Structure: day 1 setup, tools, contacts, first task.
+```

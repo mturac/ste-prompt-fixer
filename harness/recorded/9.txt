@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Kodu incele. Hatanin nedenini tek cumlede soyle once. Sonra en fazla 3 cozum adimi, emir kipiyle. Kod bloklarina dokunma, sadece isaret et. Turkce.
+```

@@ -1,0 +1,5 @@
+Format: single-file HTML.
+
+```
+Explain entropy for a dev who knows probability basics. Single-file interactive HTML. One draggable demo. Text follows ste80: max 15 words per sentence.
+```

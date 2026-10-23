@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Write a rollback procedure for a bad deploy on our CI. Steps with verbs first. Verification: one command + expected output. Rollback of the rollback: none assumed; say so.
+```

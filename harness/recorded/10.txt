@@ -1,0 +1,5 @@
+Format: Mermaid diagram.
+
+```
+Explain our auth flow: login, refresh, logout. Mermaid sequence diagram, not flowchart. Each request: method + path. Max 12 steps.
+```

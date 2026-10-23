@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Explain the Kubernetes scheduler. Audience: dev who knows pods, not nodes. Structure: one diagram idea, then 3 numbered steps of the scheduling flow. Max 250 words.
+```

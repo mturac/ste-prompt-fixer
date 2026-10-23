@@ -1,0 +1,5 @@
+Format: plain text.
+
+```
+Fix the flaky test in `api/user.test.ts`. Follow AGENTS.md: run `pnpm test:unit`, add no new dependencies. First state the root cause in one sentence, then the minimal diff.
+```
