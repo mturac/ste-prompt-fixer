@@ -1,0 +1,31 @@
+<understood>
+Müşteri destek ekibi için iade politikasını kısa ve net açıklayan bir metin istiyorsun.
+</understood>
+
+<not-sure>
+- Süre ve koşullar: [politika maddeleri]
+- Kanal: e-posta veya yardım merkezi
+</not-sure>
+
+<draft>
+```
+Görev: Müşteri destek ekibi için iade politikasını açıkla.
+Bağlam: Metin destek ekibine yönelik. Süre ve koşullar: [politika maddeleri]. Kanal: [e-posta / yardım merkezi].
+Çıktı formatı: Düz metin. En fazla 5 madde. En fazla 120 kelime.
+Kısıtlar: Cümle başına en fazla 15 kelime. Emin olmadığın kuralı yazma. Teknik terimler İngilizce kalsın.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Varsayılan profil turkish | İstek Türkçe; profiles/turkish.md uygulanır |
+| Düz metin seçildi | Kısa bir açıklama; diyagram veya HTML gerekmez |
+| Madde ve kelime sınırı | "Kısa ve net" ölçülemez |
+| Rol satırı yok | Rol ek bir kısıt getirmiyor |
+| Süre ve kanal yer tutucu | İstekte bu bilgiler yok |
+</changes>
+
+<approval>
+Bu haliyle kullanır mısın, yoksa şunu mu değiştirelim?
+</approval>

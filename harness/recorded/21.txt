@@ -1,0 +1,12 @@
+<understood>
+I cannot see a request yet.
+</understood>
+
+<not-sure>
+- The task: what the output should do
+- The material: text, code, or a file to work from
+</not-sure>
+
+<approval>
+What is the request you want fixed?
+</approval>

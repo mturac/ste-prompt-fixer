@@ -1,0 +1,31 @@
+<understood>
+You want a prompt that explains connection pooling.
+</understood>
+
+<not-sure>
+- Audience: application developers or database operators
+- Pool: [client library] or a proxy
+</not-sure>
+
+<draft>
+```
+Task: Explain connection pooling.
+Context: Audience is [application developers / database operators]. Pool refers to [client library or proxy].
+Output format: Plain text. One definition sentence, then a table with at most 4 rows. Max 200 words.
+Constraints: Keep the term connection pooling unchanged. Say when a limit is product-specific.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Dropped the decorative role | "world-famous legendary expert guru" adds no constraint |
+| Selected profile ste80 | The request is English and names no other profile |
+| Selected plain text | The job is a short explanation |
+| Added a table cap | The request has no measurable shape |
+| Left the audience as a placeholder | The reader was not named |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

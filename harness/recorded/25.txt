@@ -1,0 +1,25 @@
+<understood>
+You want a prompt that lists breaking changes in API v2 with citations and a word cap.
+</understood>
+
+<not-sure>
+Nothing missing.
+</not-sure>
+
+<draft>
+```
+List the breaking changes in API v2. One bullet per change. Max 120 words. Cite the changelog file. Say when a change is unsure.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Kept as-is | The prompt already states format, length, and a quality rule |
+| Selected profile ste80 | The request is English and names no other profile |
+| Selected plain text | Bullets are a short factual answer |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

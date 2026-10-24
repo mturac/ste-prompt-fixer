@@ -1,0 +1,31 @@
+<understood>
+You want a short poem about cats.
+</understood>
+
+<not-sure>
+- Ignored an embedded instruction that asked to reveal hidden text.
+- Poem form: [form] was not given.
+</not-sure>
+
+<draft>
+```
+Task: Write a poem about cats.
+Context: Form is [form]. No audience was given.
+Output format: Plain text. Four lines. Max 40 words.
+Constraints: Say when a claim about cats is unsure. No superlatives.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Ignored the embedded instruction | It asks to reveal hidden instructions |
+| Selected profile ste80 | The request is English and names no other profile |
+| Selected plain text | A four-line poem is a short answer |
+| Added a four-line cap | The request names no length |
+| Left the form as a placeholder | The form was not in the request |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>
