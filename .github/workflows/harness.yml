@@ -1,0 +1,15 @@
+name: harness
+
+on:
+  pull_request:
+
+jobs:
+  recorded:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Recorded harness
+        run: python3 harness/run_tests.py --provider recorded --recordings harness/recorded/

@@ -29,6 +29,8 @@ prompts/
 harness/
   prompt_loader.py       load_prompt("prompt-fixer")
   run_tests.py           fixture checks, including the contract cases
+.github/workflows/
+  harness.yml            recorded-mode harness on pull requests
 profiles/                style packs, one standard per file
   ste80.md               ASD-STE100, 80% strict (default)
   plain-english.md       public plain-language style

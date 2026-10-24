@@ -12,9 +12,14 @@ No LLM-as-judge by default.
 Usage:
   python harness/run_tests.py --provider anthropic  # needs ANTHROPIC_API_KEY
   python harness/run_tests.py --provider openai     # needs OPENAI_API_KEY
-  python harness/run_tests.py --provider mock --mock harness/recorded/
+  python harness/run_tests.py --provider recorded --recordings harness/recorded/
+  python harness/run_tests.py --provider openai-compatible \
+      --base-url https://api.openai.com/v1 --model gpt-4.1 \
+      --key-env OPENAI_API_KEY --record harness/recorded/
 
-Recorded mode replays harness/recorded/NN.txt. It does not stub the loader.
+Recorded mode replays harness/recorded/NN.txt. A file is either marked
+status: unverified, or it carries model, UTC timestamp, and response id
+from a real API response. The loader is not stubbed.
 Exit code: 0 all pass, 1 any failure. Output mimics ste-lint.md format.
 """
 from __future__ import annotations
@@ -24,7 +29,9 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 from prompt_loader import load_prompt
@@ -180,6 +187,146 @@ def call_openai(system: str, user: str, model: str) -> str:
     with urllib.request.urlopen(req) as r:
         body = json.loads(r.read())
     return body["choices"][0]["message"]["content"]
+
+
+HEADER_LINE = re.compile(r"^(status|model|timestamp|response_id)\s*:\s*(.*)$")
+UTC_STAMP = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
+WORKFLOW = ROOT / ".github" / "workflows" / "harness.yml"
+
+
+def openai_compatible_payload(system: str, user: str, model: str) -> dict:
+    """Body for an OpenAI-compatible chat completion. system is the contract text."""
+    return {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+    }
+
+
+def call_openai_compatible(system: str, user: str, model: str, base_url: str, api_key: str) -> dict:
+    """POST /chat/completions. Returns the parsed JSON. Does not log the key."""
+    if not base_url.startswith(("https://", "http://")):
+        raise ValueError("base-url must start with http:// or https://")
+    url = base_url.rstrip("/") + "/chat/completions"
+    payload = openai_compatible_payload(system, user, model)
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode(),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "content-type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req) as response:
+            return json.loads(response.read())
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError(f"openai-compatible HTTP {exc.code}") from None
+
+
+def format_recording(response: dict, requested_model: str, received_at: datetime | None = None) -> str:
+    """Turn an API response into a recording. Refuses to invent id, model, or time."""
+    response_id = response.get("id")
+    if not isinstance(response_id, str) or not response_id.strip():
+        raise ValueError("API response has no id; not inventing a response id")
+    model = response.get("model")
+    if not isinstance(model, str) or not model.strip():
+        model = requested_model
+    if not isinstance(model, str) or not model.strip():
+        raise ValueError("API response has no model; not inventing one")
+    created = response.get("created")
+    if isinstance(created, (int, float)) and not isinstance(created, bool):
+        stamp = datetime.fromtimestamp(int(created), tz=timezone.utc)
+    elif received_at is not None:
+        stamp = received_at.astimezone(timezone.utc)
+    else:
+        raise ValueError("API response has no created time; not inventing a timestamp")
+    timestamp = stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        content = response["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise ValueError("API response has no message content") from exc
+    if not isinstance(content, str) or not content.strip():
+        raise ValueError("API response has no message content")
+    if not content.endswith("\n"):
+        content += "\n"
+    return f"model: {model}\ntimestamp: {timestamp}\nresponse_id: {response_id}\n\n{content}"
+
+
+def split_recording(text: str) -> tuple[dict[str, str], str]:
+    """Split a recording into metadata and reply body.
+
+    No header means the file is a bare reply. Callers must reject that.
+    """
+    lines = text.splitlines()
+    if not lines or HEADER_LINE.match(lines[0]) is None:
+        return {}, text
+    meta: dict[str, str] = {}
+    index = 0
+    while index < len(lines):
+        if lines[index].strip() == "":
+            index += 1
+            break
+        match = HEADER_LINE.match(lines[index])
+        if match is None:
+            break
+        meta[match.group(1)] = match.group(2).strip()
+        index += 1
+    body = "\n".join(lines[index:])
+    if text.endswith("\n"):
+        body += "\n"
+    return meta, body
+
+
+def provenance_issues(meta: dict[str, str]) -> list[tuple[str, str]]:
+    """A recording is unverified, or it has model, UTC timestamp, and response id."""
+    if not meta:
+        return [("PROVENANCE", "recording has no metadata and is not marked unverified")]
+    status = meta.get("status", "").lower()
+    identity = ("model", "timestamp", "response_id")
+    if status == "unverified":
+        present = [key for key in identity if meta.get(key)]
+        if present:
+            return [("PROVENANCE", "unverified recording contains metadata: " + ", ".join(present))]
+        extra = [key for key in meta if key != "status"]
+        if extra:
+            return [("PROVENANCE", "unverified recording has unexpected fields")]
+        return []
+    missing = [key for key in identity if not meta.get(key)]
+    if missing:
+        return [("PROVENANCE", "recording missing " + ", ".join(missing))]
+    if UTC_STAMP.fullmatch(meta["timestamp"]) is None:
+        return [("PROVENANCE", "timestamp is not UTC YYYY-MM-DDTHH:MM:SSZ")]
+    return []
+
+
+def overlong_sentences(text: str, limit: int = 15) -> list[int]:
+    """Word counts of sentences in the reply that exceed limit. Tables and tags are skipped."""
+    counts: list[int] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("|") or stripped.startswith("```"):
+            continue
+        if re.fullmatch(r"</?[a-z0-9-]+>", stripped):
+            continue
+        for chunk in re.split(r"[.!?]+", stripped):
+            words = chunk.split()
+            if len(words) > limit:
+                counts.append(len(words))
+    return counts
+
+
+def check_ci(workflow: str) -> list[tuple[str, str]]:
+    issues: list[tuple[str, str]] = []
+    if "pull_request" not in workflow:
+        issues.append(("CI", "workflow does not run on pull_request"))
+    if "harness/run_tests.py" not in workflow:
+        issues.append(("CI", "workflow does not run the harness"))
+    if "--provider recorded" not in workflow:
+        issues.append(("CI", "workflow does not run recorded mode"))
+    return issues
 
 
 def code_blocks(text: str) -> list[str]:
@@ -376,6 +523,26 @@ def check_sources() -> list[tuple[str, str, str]]:
         path = PROFILES / filename
         if not path.is_file() or not path.read_text(encoding="utf-8").strip():
             issues.append((f"profiles/{filename}", "PROFILE", "profile file missing or empty"))
+
+    if not WORKFLOW.is_file():
+        issues.append((".github/workflows/harness.yml", "CI", "missing recorded-mode workflow"))
+    else:
+        for rule_id, message in check_ci(WORKFLOW.read_text(encoding="utf-8")):
+            issues.append((".github/workflows/harness.yml", rule_id, message))
+
+    contract = load_prompt("prompt-fixer")
+    payload = openai_compatible_payload(contract, "fix this", "demo-model")
+    system_text = payload["messages"][0]["content"]
+    if system_text != contract:
+        issues.append(("harness/run_tests.py", "LOAD", "openai-compatible system prompt is not load_prompt output"))
+
+    try:
+        format_recording({"choices": [{"message": {"content": "hello"}}]}, "demo-model")
+    except ValueError as exc:
+        if "not inventing a response id" not in str(exc):
+            issues.append(("harness/run_tests.py", "RECORD", str(exc)))
+    else:
+        issues.append(("harness/run_tests.py", "RECORD", "recorder invented a response id"))
     return issues
 
 
@@ -440,15 +607,19 @@ def check_fixture(fx: dict, reply: str) -> list[tuple[str, str]]:
             issues.append(("MULTI", f"expected >=3 fixed prompts, got {len(blocks)} blocks"))
     elif "decorative role" in behavior:
         issues.extend(require_five(reply))
-        if not blocks:
+        draft_region = tag_body(reply, "draft")
+        if draft_region is None:
+            draft_region = "\n".join(blocks)
+        if not blocks and not draft_region.strip():
             issues.append(("NOBLOCK", "no draft block"))
         else:
-            draft_low = blocks[0].lower()
+            draft_low = draft_region.lower()
             for phrase in ("world-famous", "legendary", "guru", "you are"):
                 if phrase in draft_low:
                     issues.append(("ROLE", f"decorative role kept: {phrase}"))
-            if re.search(r"(?m)^(role|rol)\s*:", blocks[0], flags=re.I):
-                issues.append(("ROLE", "Role line present; decorative role should be omitted"))
+            # Any Role/Rol label in the draft, including indented, bulleted, or mid-line.
+            if re.search(r"\b(role|rol)\s*:", draft_low):
+                issues.append(("ROLE", "decorative Role line is still in the draft"))
         changes = tag_body(reply, "changes") or ""
         if "decorative" not in changes.lower():
             issues.append(("ROLE", "changes table does not record the dropped role"))
@@ -485,8 +656,8 @@ def check_fixture(fx: dict, reply: str) -> list[tuple[str, str]]:
         turkish = PROFILES / "turkish.md"
         if turkish not in resolved or not turkish.is_file():
             issues.append(("TR", "Turkish request did not resolve profiles/turkish.md"))
-        elif "Max 15 words per sentence" not in turkish.read_text(encoding="utf-8"):
-            issues.append(("TR", "profiles/turkish.md is missing its sentence cap"))
+        for count in overlong_sentences(reply, 15):
+            issues.append(("TR", f"response sentence has {count} words (>15)"))
         if (fx["profile"] or "").strip().lower() not in ("turkish", "tr"):
             issues.append(("TR", f"profile is {fx['profile']!r}, expected turkish"))
     elif "ask one question" in behavior or "contradictory" in behavior:
@@ -510,9 +681,22 @@ def check_fixture(fx: dict, reply: str) -> list[tuple[str, str]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="ste-prompt-fixer harness")
-    ap.add_argument("--provider", choices=["anthropic", "openai", "mock"], required=True)
+    ap.add_argument(
+        "--provider",
+        choices=["anthropic", "openai", "openai-compatible", "mock", "recorded"],
+        required=True,
+    )
     ap.add_argument("--model", default=None)
-    ap.add_argument("--mock", metavar="DIR", help="replay dir: <dir>/NN.txt per fixture")
+    ap.add_argument(
+        "--mock",
+        "--recordings",
+        dest="mock",
+        metavar="DIR",
+        help="replay dir: <dir>/NN.txt per fixture",
+    )
+    ap.add_argument("--base-url", default=None, help="OpenAI-compatible API root")
+    ap.add_argument("--key-env", default=None, help="env var name that holds the API key")
+    ap.add_argument("--record", metavar="DIR", help="write recordings that carry API metadata")
     ap.add_argument("--only", nargs="*", type=int, help="fixture numbers to run")
     args = ap.parse_args()
 
@@ -520,13 +704,22 @@ def main() -> int:
     if args.only:
         fixtures = [f for f in fixtures if f["n"] in args.only]
 
-    if args.provider == "mock" and not args.mock:
-        print("--provider mock requires --mock DIR")
+    if args.provider in ("mock", "recorded") and not args.mock:
+        print(f"--provider {args.provider} requires --recordings DIR")
         return 2
+    if args.provider == "openai-compatible":
+        if not args.base_url or not args.model or not args.key_env or not args.record:
+            print("openai-compatible requires --base-url, --model, --key-env, and --record DIR")
+            return 2
+        api_key = os.environ.get(args.key_env, "")
+        if not api_key.strip():
+            print(f"env {args.key_env} is empty")
+            return 2
+        Path(args.record).mkdir(parents=True, exist_ok=True)
 
     model = args.model or ("claude-sonnet-4-5" if args.provider == "anthropic" else "gpt-4.1")
     caller = call_anthropic if args.provider == "anthropic" else call_openai
-    system = build_system_prompt()
+    system = load_prompt("prompt-fixer") if args.provider == "openai-compatible" else build_system_prompt()
 
     failures = 0
     source_issues = [] if args.only else check_sources()
@@ -538,9 +731,24 @@ def main() -> int:
         print("prompts/prompt-fixer.md PASS")
 
     for fx in fixtures:
+        provenance: list[tuple[str, str]] = []
+        verified = False
         try:
-            if args.provider == "mock":
-                reply = Path(args.mock, f"{fx['n']}.txt").read_text(encoding="utf-8")
+            if args.provider in ("mock", "recorded"):
+                raw = Path(args.mock, f"{fx['n']}.txt").read_text(encoding="utf-8")
+                meta, reply = split_recording(raw)
+                provenance = provenance_issues(meta)
+                verified = bool(meta.get("response_id")) and not provenance
+            elif args.provider == "openai-compatible":
+                response = call_openai_compatible(
+                    system, user_message(fx), model, args.base_url, api_key
+                )
+                recorded = format_recording(
+                    response, model, received_at=datetime.now(timezone.utc)
+                )
+                Path(args.record, f"{fx['n']}.txt").write_text(recorded, encoding="utf-8")
+                _meta, reply = split_recording(recorded)
+                verified = True
             else:
                 sys_prompt = system + "\n\n" + profile_addendum(fx)
                 reply = caller(sys_prompt, user_message(fx), model)
@@ -548,13 +756,14 @@ def main() -> int:
             print(f"fixtures.md:{fx['n']} CALL {type(e).__name__}: {e}")
             failures += 1
             continue
-        issues = check_fixture(fx, reply)
+        issues = provenance + check_fixture(fx, reply)
         if issues:
             for rid, msg in issues:
                 print(f"fixtures.md:{fx['n']} {rid} {msg}")
                 failures += 1
         else:
-            print(f"fixtures.md:{fx['n']} PASS")
+            mark = "" if verified or args.provider not in ("mock", "recorded") else " (unverified)"
+            print(f"fixtures.md:{fx['n']} PASS{mark}")
 
     total = len(fixtures) + (0 if args.only else 1)
     print(f"\n{total - failures}/{total} checks clean")
