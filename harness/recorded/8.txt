@@ -1,5 +1,34 @@
-Format: plain text.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:59:02Z
+response_id: 4d586623-680a-4e66-b5ce-16196d413070
 
+<understood>
+Sitemiz için dinamik ve yenilikçi bir blog yazısı istiyorsun.
+</understood>
+
+<not-sure>
+- Blog yazısının konusu belli değil.
+- Hedef kitle kim?
+- Uzunluk ve yayın platformu?
+</not-sure>
+
+<draft>
 ```
-Blog yazisi icin giris metni yaz. Turkce. En fazla 15 kelime/cumle. 'Son derece' ve 'dinamik' gibi bos sifatlar yok. Sayilar rakamla. Teknik terimler Ingilizce kalsin. Max 200 kelime.
+Görev: Sitemiz için dinamik ve yenilikçi bir blog yazısı hazırla.
+Bağlam: Konu [blog konusu]. Hedef kitle [hedef kitle]. Sektör [sektör].
+Çıktı formatı: Markdown. Bir H1, üç H2. En fazla [kelime sayısı] kelime.
+Kısıtlar: Somut örnekler ver. Emin değilsen belirt. Kaynak göster. Abartılı sıfat kullanma.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profil turkish, format düz metin | Türkçe istek, blog yazısı. |
+| Konu ve kitle için boşluk eklendi | Mesajda bu bilgiler yok. |
+| Bölüm sayısı ve kelime sınırı eklendi | "Süper" ölçülebilir değil. |
+</changes>
+
+<approval>
+Bu haliyle kullanır mısın, yoksa şunu mu değiştirelim?
+</approval>

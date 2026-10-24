@@ -1,1 +1,15 @@
-Which wins: detail or the 10-word cap?
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:27Z
+response_id: 89293205-90c9-43f5-bead-1564f30c8399
+
+<understood>
+You want an explanation with two conflicting length rules.
+</understood>
+
+<not-sure>
+- Full detail conflicts with a 10-word cap.
+</not-sure>
+
+<approval>
+Which wins: depth or the 10-word cap?
+</approval>

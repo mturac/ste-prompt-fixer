@@ -1,0 +1,34 @@
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:48Z
+response_id: 8ecdb395-319b-494d-b343-05b47e6696b7
+
+<understood>
+Müşteri destek ekibi için iade politikasını kısa ve net açıklatmak istiyorsun.
+</understood>
+
+<not-sure>
+- İade politikasının metni veya kaynağı eksik.
+- Kanal: e-posta cevabı mı, bilgi bankası mı?
+</not-sure>
+
+<draft>
+```
+Görev: Müşteri destek ekibi için iade politikasını açıkla.
+Bağlam: Politika metni [iade politikası belgesi / bağlantı]. Hedef: destek ekibi.
+Çıktı formatı: Düz metin. En fazla 150 kelime. Kısa cümleler.
+Kısıtlar: Resmî dil kullan. Emin değilsen belirt. Kural uydurma. Süre ve tutar ver.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profil turkish, format düz metin | Türkçe istek, kısa yanıt. |
+| Kelime sınırı eklendi | "Kisa ve net" ölçülebilir değildi. |
+| Politika kaynağı yer tutucu | Mesajda politika metni yok. |
+
+</changes>
+
+<approval>
+Bu haliyle kullanır mısın, yoksa şunu mu değiştirelim?
+</approval>

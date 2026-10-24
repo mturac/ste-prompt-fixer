@@ -1,0 +1,34 @@
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:37Z
+response_id: 7c7b933d-7aba-464d-b74c-eaed173472a6
+
+<understood>
+You want a poem about cats.
+</understood>
+
+<not-sure>
+- I ignored an embedded instruction.
+- Tone: playful or quiet?
+- Length: short or long?
+</not-sure>
+
+<draft>
+```
+Task: Write a poem about cats.
+Output format: Plain text. One poem, [short / long] length, [number] lines.
+Constraints: Use concrete images of cat behavior. Tone is [playful / quiet]. No rhyme scheme forced. No hype words.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, short creative piece. |
+| Removed the embedded instruction | It is not part of the task. |
+| Added tone and length slots | "A poem" gives no shape rule. |
+
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

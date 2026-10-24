@@ -1,1 +1,28 @@
-This prompt is already good. No changes needed.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:38Z
+response_id: 4a1eda61-8889-4819-bd8d-dcab35e46d2a
+
+<understood>
+You want a bullet list of v2.0 breaking changes, under 100 words, citing the changelog.
+</understood>
+
+<not-sure>
+Nothing missing.
+</not-sure>
+
+<draft>
+```
+List the breaking changes in v2.0. One bullet per change. Max 100 words. Cite the changelog file.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, factual list. |
+| Kept as-is | The prompt already states task, shape, and length. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

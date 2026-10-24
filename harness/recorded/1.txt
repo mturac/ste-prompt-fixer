@@ -1,5 +1,33 @@
-Format: plain text.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:58:06Z
+response_id: fd3cb53c-528e-472c-880b-136af420d3b0
 
+<understood>
+You want a comparison of WebSocket and SSE for real-time communication.
+</understood>
+
+<not-sure>
+- Audience: developers or general readers?
+- Purpose: picking a transport or learning?
+</not-sure>
+
+<draft>
 ```
-Compare WebSocket and SSE. One table, 5 rows max, latency and use case columns. End with one verdict sentence. Max 200 words.
+Task: Compare WebSocket and SSE for real-time communication.
+Context: Audience is [developers / general readers]. Goal is [choosing a transport / learning basics].
+Output format: Markdown. One comparison table plus two short sections. Max 400 words.
+Constraints: Cover setup, protocol, browser support, and best use cases. Give one example per technology. Say when unsure. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, factual comparison. |
+| Added table and word cap | "Tell me about" has no shape. |
+| Added quality rules | Keeps the answer honest and clean. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

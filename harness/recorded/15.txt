@@ -1,13 +1,54 @@
-These are three separate jobs. Here is one prompt per job, in order.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:17Z
+response_id: ac86286f-3f40-464a-a867-a02d5f0c4c8f
+
+<understood>
+You want three separate jobs: refactor code, write docs, fix an unknown bug.
+</understood>
+
+<not-sure>
+- Which bug? No error or report given.
+- Codebase path and language?
+- Docs audience and format?
+</not-sure>
+
+<draft>
+Refactor codebase
 
 ```
-Refactor src/auth/: extract token handling into auth/tokens.ts. Keep public API stable. Add one test per moved function. Follow AGENTS.md.
+Task: Refactor the codebase at [file path].
+Context: Language is [language]. Keep behavior unchanged.
+Output format: List changed files, then a short summary per file.
+Constraints: No new features. Keep public APIs stable. Say when unsure.
 ```
 
-```
-Write docs for the public API of src/auth/. One section per exported function: name, signature, one example, one gotcha. Max 400 words.
-```
+Write docs
 
 ```
-State which bug you mean: file, observed behavior, expected behavior. Then ask me to fix it. Do not guess the bug from the codebase.
+Task: Write documentation for the codebase at [file path].
+Context: Audience is [audience]. Cover setup, usage, and main APIs.
+Output format: Markdown. One H1, up to five H2 sections, max 800 words.
+Constraints: Define terms on first use. Cite file paths. No hype words.
 ```
+
+Fix bug
+
+```
+Task: Fix the bug described as [bug report or error message].
+Context: File is [file path]. Repro steps are [steps].
+Output format: Show the diff, then explain the cause in five lines.
+Constraints: Minimal change. Add a test. Say when unsure.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, three code tasks. |
+| Split into three code blocks | Three unrelated tasks, never merged. |
+| Added placeholders for gaps | Bug, path, and audience are unknown. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

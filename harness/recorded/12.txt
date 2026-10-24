@@ -1,5 +1,35 @@
-Format: plain text.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:09Z
+response_id: 7b0dcef2-10e2-4e50-85b0-6bd76b49e7da
 
+<understood>
+You want a prompt to fix one flaky test in your repo.
+</understood>
+
+<not-sure>
+- Which test file or test name?
+- What failure message or behavior?
+- Is flakiness timing or order-dependent?
+</not-sure>
+
+<draft>
 ```
-Fix the flaky test in `api/user.test.ts`. Follow AGENTS.md: run `pnpm test:unit`, add no new dependencies. First state the root cause in one sentence, then the minimal diff.
+Task: Fix the flaky test in [test file / test name].
+Context: Symptom is [failure message or behavior]. Flakiness is [timing / order-dependent / intermittent]. Repo rule: run `pnpm test:unit`. No new dependencies.
+Output format: Plain text. Show changed code, then one line on the root cause.
+Constraints: Keep the test's intent. No new deps. No skips or retries. Say when unsure.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, code fix. |
+| Added `pnpm test:unit`, no new deps | Repo AGENTS.md states them. |
+| Placeholders for test and symptom | Message names neither. |
+
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

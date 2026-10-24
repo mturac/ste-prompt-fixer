@@ -1,5 +1,34 @@
-Format: plain text.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:58:47Z
+response_id: 7deef27d-54c5-4f9a-b190-d36bdf782b6c
 
+<understood>
+You want to migrate a database to a safer target.
+</understood>
+
+<not-sure>
+- Which database engine and current host?
+- Target platform or location?
+- Downtime tolerance and data size?
+</not-sure>
+
+<draft>
 ```
-Write a procedure to migrate the Postgres DB to the new host. Include: prerequisites, steps with one action each, verification command, rollback. Warning before any data-touching step.
+Task: Migrate the database to a safer target.
+Context: Database is [engine and current host]. Target is [platform or location]. Reason: [security, compliance, backup].
+Output format: Numbered migration plan, max 400 words. Sections: pre-checks, steps, verification, rollback.
+Constraints: Estimate downtime per step. Include a rollback plan. Say when unsure. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, plan needed. |
+| Added plan sections and word cap | "Safer" needs a checkable shape. |
+| Added rollback and downtime rules | Migration plans need both. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

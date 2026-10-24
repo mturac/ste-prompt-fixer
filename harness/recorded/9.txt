@@ -1,5 +1,34 @@
-Format: plain text.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:59:14Z
+response_id: bc04f9a9-3c55-4163-afdc-2954c48638cf
 
+<understood>
+Bozuk kodunun incelenip düzeltilmesini istiyorsun.
+</understood>
+
+<not-sure>
+- Kod dosyası veya metni eklenmemiş.
+- Aldığın hata mesajı nedir?
+- Kodlama dili ve ortam nedir?
+</not-sure>
+
+<draft>
 ```
-Kodu incele. Hatanin nedenini tek cumlede soyle once. Sonra en fazla 3 cozum adimi, emir kipiyle. Kod bloklarina dokunma, sadece isaret et. Turkce.
+Görev: Verdiğim kodu incele, hatayı bul ve düzelt.
+Bağlam: Kod: [kod metni veya dosya yolu]. Hata: [hata mesajı]. Dil: [dil ve sürüm].
+Çıktı formatı: Önce hata nedeni, sonra düzeltilmiş kod. Kod blokları kullan. En fazla 300 kelime.
+Kısıtlar: Orijinal kod yapısını koru. Emin değilsen söyle. Gereksiz ekleme yapma. Hype sözcük kullanma.
 ```
+`</draft>`
+
+<changes>`
+| Change | Why |
+|---|---|
+| Profil turkish, format düz metin | Türkçe istek, kod inceleme. |
+| Kod ve hata için yer tutucu eklendi | Mesajda kod ve hata yok. |
+| Kelime sınırı ve düzeltme kuralı eklendi | "Bi bak" ölçülebilir değil. |
+`</changes>`
+
+<approval>
+Bu haliyle kullanır mısın, yoksa şunu mu değiştirelim?
+</approval>

@@ -1,0 +1,51 @@
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:42Z
+response_id: c847e038-5ace-4692-8e55-0a0c5ea69ed1
+
+<understood>
+You want three separate deliverables: a v3 release note, a billing webhook explanation, and a status page incident template.
+</understood>
+
+<not-sure>
+- What changed in v3?
+- Webhook events and payload fields?
+- Incident template audience and format?
+</not-sure>
+
+<draft>
+Release note for v3
+```
+Task: Write a release note for version v3.
+Context: Changes are [changelog or list of changes]. Audience is [developers / customers].
+Output format: Markdown. One H1, then "Added", "Changed", "Fixed" sections. Max 250 words.
+Constraints: One bullet per change. Plain sentences. No hype words. Say when unsure.
+```
+
+Billing webhook explanation
+```
+Task: Explain our billing webhook.
+Context: Webhook details are [events, payload, retries, signature check].
+Output format: Markdown. Four sections: purpose, events, payload, error handling. Max 400 words.
+Constraints: Define each term on first use. Include one payload example. Say when unsure.
+```
+
+Status page incident template
+```
+Task: Draft a status page incident template.
+Context: Platform is [status page tool]. Readers are [customers / internal].
+Output format: Markdown template with placeholders. Sections: Investigating, Identified, Monitoring, Resolved. Max 300 words.
+Constraints: Each section has a fill-in line. Neutral tone. No hype words.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, three writing tasks. |
+| Split into three code blocks | Three unrelated tasks, never merged. |
+| Added word caps and placeholders | Gaps and length were not stated. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

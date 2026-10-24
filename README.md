@@ -23,13 +23,20 @@ Any agent following the agentskills.io format: place the folder in its skills pa
 ## Structure
 
 ```
-SKILL.md                 core flow: intent -> rewrite -> format
+SKILL.md                 flow and profile selection; points at the contract
+prompts/
+  prompt-fixer.md        five-part output contract, loaded at runtime
+harness/
+  prompt_loader.py       load_prompt("prompt-fixer")
+  run_tests.py           fixture checks, including the contract cases
+.github/workflows/
+  harness.yml            recorded-mode harness on pull requests
 profiles/                style packs, one standard per file
   ste80.md               ASD-STE100, 80% strict (default)
   plain-english.md       public plain-language style
   globish.md             1500-word ceiling, non-native readers
   cte-style.md           procedure-first service manual style
-  turkish.md             Turkish humanizer + STE hybrid
+  turkish.md             Turkish humanizer + STE hybrid (default for Turkish)
 conventions/             context packs
   agents-md.md           align prompts with repo AGENTS.md rules
   llms-txt.md            suggest /llms.txt for site-targeted prompts
@@ -40,6 +47,8 @@ tests/
 examples/
   before-after.md        one fixed prompt per profile
 ```
+
+Turkish requests use `profiles/turkish.md` by default. The output contract is `prompts/prompt-fixer.md`. `harness/prompt_loader.py` loads it at runtime; the text is not copied into code. A draft block is at most 150 words, and the rest of the reply is at most 150 words.
 
 The model reads a profile file only when that profile is selected. Keeps context small.
 

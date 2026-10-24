@@ -1,1 +1,15 @@
-What is 'it', and which metric defines faster for you?
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:09Z
+response_id: 796e9801-ecf0-4db0-8ad4-7dbc8d175c4f
+
+<understood>
+You want something made faster.
+</understood>
+
+<not-sure>
+- "It" does not name the subject.
+</not-sure>
+
+<approval>
+What should I make faster: code, a query, a build, or something else?
+</approval>

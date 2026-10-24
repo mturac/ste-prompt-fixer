@@ -1,0 +1,29 @@
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:50Z
+response_id: 46f61cd5-5ac4-46ae-bf46-c4d7004d35f7
+
+<understood>
+You want a bullet list of API v2 breaking changes, capped at 120 words.
+</understood>
+
+<not-sure>
+- Changelog file path is not given.
+</not-sure>
+
+<draft>
+```
+List the breaking changes in API v2. One bullet per change. Max 120 words. Cite the changelog file. Say when a change is unsure.
+```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, short factual list. |
+| Kept as-is | The prompt already states task, shape, and length. |
+
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

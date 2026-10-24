@@ -1,5 +1,33 @@
-Format : texte simple.
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:30Z
+response_id: 32aae6f8-d33b-4b26-9dd9-6feac2d0f435
 
+<understood>
+Tu veux une explication claire des différences entre git rebase et git merge.
+</understood>
+
+<not-sure>
+- Public : débutant ou développeur confirmé ?
+- Profondeur : rapide ou détaillée ?
+</not-sure>
+
+<draft>
 ```
-Explique la difference entre git rebase et git merge. Un tableau, 5 lignes max. Une recommandation finale en une phrase. Max 200 mots.
+Tâche: Explique la différence entre git rebase et git merge.
+Contexte: Public [débutant / développeur confirmé]. Réponse urgente, donc concise.
+Format de sortie: Texte clair. Un tableau comparatif, puis deux exemples de commandes. 250 mots maximum.
+Contraintes: Définis chaque terme à la première utilisation. Indique quand tu n'es pas sûr. Pas de mots promotionnels.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profil ste80, format texte clair | Demande en français, réponse factuelle. |
+| Ajout tableau et limite de mots | L'urgence demande une réponse courte. |
+| Ajout règle de qualité | Pour éviter les affirmations vagues. |
+</changes>
+
+<approval>
+On l'utilise tel quel, ou on change quelque chose ?
+</approval>
