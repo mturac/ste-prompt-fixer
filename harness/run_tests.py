@@ -194,23 +194,35 @@ UTC_STAMP = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 WORKFLOW = ROOT / ".github" / "workflows" / "harness.yml"
 
 
-def openai_compatible_payload(system: str, user: str, model: str) -> dict:
+def openai_compatible_payload(
+    system: str, user: str, model: str, temperature: float | None = None
+) -> dict:
     """Body for an OpenAI-compatible chat completion. system is the contract text."""
-    return {
+    body = {
         "model": model,
         "messages": [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
         ],
     }
+    if temperature is not None:
+        body["temperature"] = temperature
+    return body
 
 
-def call_openai_compatible(system: str, user: str, model: str, base_url: str, api_key: str) -> dict:
+def call_openai_compatible(
+    system: str,
+    user: str,
+    model: str,
+    base_url: str,
+    api_key: str,
+    temperature: float | None = None,
+) -> dict:
     """POST /chat/completions. Returns the parsed JSON. Does not log the key."""
     if not base_url.startswith(("https://", "http://")):
         raise ValueError("base-url must start with http:// or https://")
     url = base_url.rstrip("/") + "/chat/completions"
-    payload = openai_compatible_payload(system, user, model)
+    payload = openai_compatible_payload(system, user, model, temperature)
     req = urllib.request.Request(
         url,
         data=json.dumps(payload).encode(),
@@ -697,6 +709,9 @@ def main() -> int:
     ap.add_argument("--base-url", default=None, help="OpenAI-compatible API root")
     ap.add_argument("--key-env", default=None, help="env var name that holds the API key")
     ap.add_argument("--record", metavar="DIR", help="write recordings that carry API metadata")
+    ap.add_argument(
+        "--temperature", type=float, default=None, help="sampling temperature sent to the API"
+    )
     ap.add_argument("--only", nargs="*", type=int, help="fixture numbers to run")
     args = ap.parse_args()
 
@@ -741,7 +756,7 @@ def main() -> int:
                 verified = bool(meta.get("response_id")) and not provenance
             elif args.provider == "openai-compatible":
                 response = call_openai_compatible(
-                    system, user_message(fx), model, args.base_url, api_key
+                    system, user_message(fx), model, args.base_url, api_key, args.temperature
                 )
                 recorded = format_recording(
                     response, model, received_at=datetime.now(timezone.utc)

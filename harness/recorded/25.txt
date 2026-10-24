@@ -1,11 +1,13 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:50Z
+response_id: 46f61cd5-5ac4-46ae-bf46-c4d7004d35f7
 
 <understood>
-You want a prompt that lists breaking changes in API v2 with citations and a word cap.
+You want a bullet list of API v2 breaking changes, capped at 120 words.
 </understood>
 
 <not-sure>
-Nothing missing.
+- Changelog file path is not given.
 </not-sure>
 
 <draft>
@@ -17,9 +19,9 @@ List the breaking changes in API v2. One bullet per change. Max 120 words. Cite 
 <changes>
 | Change | Why |
 |---|---|
-| Kept as-is | The prompt already states format, length, and a quality rule |
-| Selected profile ste80 | The request is English and names no other profile |
-| Selected plain text | Bullets are a short factual answer |
+| Profile ste80, format plain text | English request, short factual list. |
+| Kept as-is | The prompt already states task, shape, and length. |
+
 </changes>
 
 <approval>

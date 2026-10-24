@@ -1,7 +1,33 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:59:46Z
+response_id: 299ce35e-c93d-4c4b-83b0-731692c92575
 
-Format: Mermaid diagram.
+<understood>
+You want an explanation of the auth system or mechanism.
+</understood>
 
+<not-sure>
+- Which auth system or codebase?
+- Audience: developers or general readers?
+</not-sure>
+
+<draft>
 ```
-Explain our auth flow: login, refresh, logout. Mermaid sequence diagram, not flowchart. Each request: method + path. Max 12 steps.
+Task: Explain the auth mechanism in [system / codebase].
+Context: Audience is [developers / general readers]. Cover login flow, token handling, and access checks.
+Output format: Plain text. Three sections, max 400 words.
+Constraints: Define each term on first use. Say when unsure. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, short explanation. |
+| Added sections and word cap | "Explain" alone has no shape. |
+| Placeholders for system and audience | The message names neither. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

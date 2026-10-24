@@ -1,7 +1,34 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:58:52Z
+response_id: 78a63a32-8c6f-4725-a806-73aff6475e4f
 
-Format: plain text.
+<understood>
+You want an engineering onboarding document for new hires in Indonesia and Vietnam.
+</understood>
 
+<not-sure>
+- Audience: new hires or managers?
+- What "eng stuff" covers: tooling, workflows, standards?
+- Length or format for the doc?
+</not-sure>
+
+<draft>
 ```
-Write onboarding docs for hires in Indonesia and Vietnam. Common international English only, 1500-word ceiling. No idioms. Max 15 words/sentence. Dates ISO. Structure: day 1 setup, tools, contacts, first task.
+Task: Write an engineering onboarding document for new hires in Indonesia and Vietnam.
+Context: Audience is [new hires / hiring managers]. "Eng stuff" means [tooling, workflows, code standards, on-call].
+Output format: Markdown. One H1, five H2 sections, max 900 words. One table of regional differences.
+Constraints: Cover both countries in one doc. Flag local differences in the table. Say when unsure. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, document output. |
+| Added section count and word cap | "Doc" alone is not measurable. |
+| Added regional difference table | Two countries need clear comparison. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

@@ -1,3 +1,15 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:15Z
+response_id: 83f48b63-10ae-4396-a45c-6857ad2155d3
 
-Which input should I summarize? Nothing came with your message.
+<understood>
+You want a summary of some text.
+</understood>
+
+<not-sure>
+- The text to summarize is not attached.
+</not-sure>
+
+<approval>
+Which text should I summarize?
+</approval>

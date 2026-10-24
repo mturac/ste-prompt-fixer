@@ -1,49 +1,49 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:42Z
+response_id: c847e038-5ace-4692-8e55-0a0c5ea69ed1
 
 <understood>
-You want three prompts: a v3 release note, a billing webhook explanation, and a status page incident template.
+You want three separate deliverables: a v3 release note, a billing webhook explanation, and a status page incident template.
 </understood>
 
 <not-sure>
-- Release contents: the change list is missing
-- Webhook facts: event names and payload fields are missing
-- Incident facts: service name and status states are missing
+- What changed in v3?
+- Webhook events and payload fields?
+- Incident template audience and format?
 </not-sure>
 
 <draft>
-Release note
+Release note for v3
 ```
-Task: Write the release note for v3.
-Context: Version is v3. Changes are [change list]. Audience is [readers].
-Output format: Plain text. One line per change. Max 120 words.
-Constraints: Say when a change is unsure. No superlatives.
-```
-
-Webhook
-```
-Task: Explain the billing webhook.
-Context: Event names and payload fields are [webhook events]. Audience is [backend developers].
-Output format: Plain text. One table, max 6 rows. Max 150 words.
-Constraints: Keep event names unchanged. Say when a field is unsure.
+Task: Write a release note for version v3.
+Context: Changes are [changelog or list of changes]. Audience is [developers / customers].
+Output format: Markdown. One H1, then "Added", "Changed", "Fixed" sections. Max 250 words.
+Constraints: One bullet per change. Plain sentences. No hype words. Say when unsure.
 ```
 
-Incident template
+Billing webhook explanation
+```
+Task: Explain our billing webhook.
+Context: Webhook details are [events, payload, retries, signature check].
+Output format: Markdown. Four sections: purpose, events, payload, error handling. Max 400 words.
+Constraints: Define each term on first use. Include one payload example. Say when unsure.
+```
+
+Status page incident template
 ```
 Task: Draft a status page incident template.
-Context: The service and the status states are [service and states].
-Output format: Plain text. Sections: impact, status, next update. Max 150 words.
-Constraints: One fact per sentence. Say when the status is unsure.
+Context: Platform is [status page tool]. Readers are [customers / internal].
+Output format: Markdown template with placeholders. Sections: Investigating, Identified, Monitoring, Resolved. Max 300 words.
+Constraints: Each section has a fill-in line. Neutral tone. No hype words.
 ```
 </draft>
 
 <changes>
 | Change | Why |
 |---|---|
-| Split into three drafts | The request names three unrelated jobs |
-| Selected profile ste80 | The request is English and names no other profile |
-| Selected plain text | Each job is a short factual answer |
-| One label per block | Each block names its one job |
-| Left missing facts as placeholders | The change list, events, and service were not given |
+| Profile ste80, format plain text | English request, three writing tasks. |
+| Split into three code blocks | Three unrelated tasks, never merged. |
+| Added word caps and placeholders | Gaps and length were not stated. |
 </changes>
 
 <approval>

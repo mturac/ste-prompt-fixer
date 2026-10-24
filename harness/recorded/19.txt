@@ -1,7 +1,39 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:11Z
+response_id: e0cf037d-a115-48ef-aba7-3d87d41d36e7
 
-Format: plain text.
+<understood>
+Prod çökmesi için acil müdahale adımları istiyorsun.
+</understood>
 
+<not-sure>
+- Hangi servis veya hata mesajı?
+- Log veya metrik erişimi var mı?
+- Ekip iletişim kanalı nedir?
+</not-sure>
+
+<draft>
 ```
-Bir incident runbooku yaz. Turkce. Yapi: purpose, prerequisites, steps (her adimda 1 aksiyon, emir kipi), verification, rollback. Tehlikeli adimdan once uyari. Max 15 kelime/cumle.
+Görev: Prod çökmesi için acil müdahale adımlarını yaz.
+Bağlam: Etkilenen servis [servis adı]. Hata mesajı [hata mesajı].
+Log veya metrik linki [link]. Ekip kanalı [kanal].
+Çıktı formatı: Numaralı liste. En fazla 10 adım.
+Önce tespit, sonra geçici çözüm, en son kalıcı düzeltme.
+Her adımda sorumlu rol belirt. Süre sınırı ekle.
+Kısıtlar: Bilinmeyen bilgiyi uydurma. Emin değilsen belirt.
+Teknik terimleri olduğu gibi kullan. Hype sözcük yok.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profil turkish, format düz metin | Türkçe istek, acil durum adımları. |
+| Adım sayısı ve sıra eklendi | "Ne yapıyoruz" ölçülebilir değildi. |
+| Boşluklar için yer tutucu eklendi | Servis ve hata bilgisi yok. |
+
+</changes>
+
+<approval>
+Bu haliyle kullanır mısın, yoksa şunu mu değiştirelim?
+</approval>

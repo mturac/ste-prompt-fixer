@@ -1,7 +1,34 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:59:02Z
+response_id: 9f641f6c-5683-49ec-b1cb-eca14d7e9992
 
-Format: plain text.
+<understood>
+You want a short changelog blurb for v2.3, kept simple.
+</understood>
 
+<not-sure>
+- What changed in v2.3?
+- Audience: end users or developers?
+</not-sure>
+
+<draft>
 ```
-Write the changelog for v2.3. Max 20 words per sentence. Everyday words; define any jargon inline. One line per change: what it is, who benefits.
+Task: Write a changelog blurb for version 2.3.
+Context: Changes are [list of changes]. Audience is [end users / developers].
+Output format: Plain text. One short intro line, then 3 to 5 bullets. Max 120 words.
+Constraints: Plain wording, no hype words. Group items as Added, Fixed, Changed. Say when a change is unclear.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, short factual text. |
+| Added bullet count and word cap | "Nothing fancy" needs a size limit. |
+| Added change categories | Keeps the blurb scannable. |
+
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

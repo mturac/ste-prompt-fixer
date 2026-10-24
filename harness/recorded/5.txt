@@ -1,7 +1,33 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:58:49Z
+response_id: be3bc0dd-c7df-4b7e-8f61-8589e2ba22a0
 
-Format: plain text.
+<understood>
+You want steps to roll back a bad deploy.
+</understood>
 
+<not-sure>
+- Stack and deploy method?
+- Is the bad version still live?
+</not-sure>
+
+<draft>
 ```
-Write a rollback procedure for a bad deploy on our CI. Steps with verbs first. Verification: one command + expected output. Rollback of the rollback: none assumed; say so.
+Task: Explain how to undo a bad deploy.
+Context: Stack and deploy method are [stack / tool]. The bad version is [live / already stopped]. Cause is [unknown / known].
+Output format: Plain text. Numbered steps, max 8 steps, max 300 words.
+Constraints: Put fastest rollback first. Say when a step needs access or backups. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, how-to answer. |
+| Added step and word caps | "How do I" has no shape rule. |
+| Placeholders for stack and state | Rollback steps depend on both. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

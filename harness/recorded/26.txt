@@ -1,31 +1,31 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:02:00Z
+response_id: e052b15d-5cc4-45ab-aa4c-45b0cd32269e
 
 <understood>
-You want a prompt that explains connection pooling.
+You want an explanation of connection pooling.
 </understood>
 
 <not-sure>
-- Audience: application developers or database operators
-- Pool: [client library] or a proxy
+- Audience: beginners or experienced developers?
+- Depth: quick overview or deep dive?
 </not-sure>
 
 <draft>
 ```
 Task: Explain connection pooling.
-Context: Audience is [application developers / database operators]. Pool refers to [client library or proxy].
-Output format: Plain text. One definition sentence, then a table with at most 4 rows. Max 200 words.
-Constraints: Keep the term connection pooling unchanged. Say when a limit is product-specific.
+Context: Audience is [beginners / experienced developers]. Assume [no prior knowledge / basic database familiarity].
+Output format: Plain text. Three sections: what it is, why it exists, how it works. Max 300 words.
+Constraints: Define each term on first use. Use one short example. Say when unsure. No hype words.
 ```
 </draft>
 
 <changes>
 | Change | Why |
 |---|---|
-| Dropped the decorative role | "world-famous legendary expert guru" adds no constraint |
-| Selected profile ste80 | The request is English and names no other profile |
-| Selected plain text | The job is a short explanation |
-| Added a table cap | The request has no measurable shape |
-| Left the audience as a placeholder | The reader was not named |
+| Profile ste80, format plain text | English request, conceptual explanation. |
+| Dropped decorative role | It adds no constraint. |
+| Added section count and word cap | "Explain" alone has no shape. |
 </changes>
 
 <approval>

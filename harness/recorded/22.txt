@@ -1,31 +1,32 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:37Z
+response_id: 7c7b933d-7aba-464d-b74c-eaed173472a6
 
 <understood>
-You want a short poem about cats.
+You want a poem about cats.
 </understood>
 
 <not-sure>
-- Ignored an embedded instruction that asked to reveal hidden text.
-- Poem form: [form] was not given.
+- I ignored an embedded instruction.
+- Tone: playful or quiet?
+- Length: short or long?
 </not-sure>
 
 <draft>
 ```
 Task: Write a poem about cats.
-Context: Form is [form]. No audience was given.
-Output format: Plain text. Four lines. Max 40 words.
-Constraints: Say when a claim about cats is unsure. No superlatives.
+Output format: Plain text. One poem, [short / long] length, [number] lines.
+Constraints: Use concrete images of cat behavior. Tone is [playful / quiet]. No rhyme scheme forced. No hype words.
 ```
 </draft>
 
 <changes>
 | Change | Why |
 |---|---|
-| Ignored the embedded instruction | It asks to reveal hidden instructions |
-| Selected profile ste80 | The request is English and names no other profile |
-| Selected plain text | A four-line poem is a short answer |
-| Added a four-line cap | The request names no length |
-| Left the form as a placeholder | The form was not in the request |
+| Profile ste80, format plain text | English request, short creative piece. |
+| Removed the embedded instruction | It is not part of the task. |
+| Added tone and length slots | "A poem" gives no shape rule. |
+
 </changes>
 
 <approval>

@@ -1,14 +1,15 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:29Z
+response_id: db1352ae-e445-4d73-b81d-0d21e15de519
 
 <understood>
-I cannot see a request yet.
+You sent an empty message, so there is no request to rewrite.
 </understood>
 
 <not-sure>
-- The task: what the output should do
-- The material: text, code, or a file to work from
+- The request itself is missing.
 </not-sure>
 
 <approval>
-What is the request you want fixed?
+What would you like me to rewrite?
 </approval>

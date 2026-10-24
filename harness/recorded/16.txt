@@ -1,7 +1,34 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:00:19Z
+response_id: 8676c384-b11c-488a-a157-d8ec2db72ce1
 
-The module is long. Reference it as an attachment instead of pasting.
+<understood>
+You want an explanation of the 200-line code pasted in the message.
+</understood>
 
+<not-sure>
+- Audience: experienced developer or beginner?
+- Depth: quick overview or line-by-line?
+- Focus: logic, bugs, or style?
+</not-sure>
+
+<draft>
 ```
-Explain the attached module. Do not restate the code. Data flow as bullets. Public API surface in one table. Max 200 words. Follow ste80.
+Task: Explain the code provided with this prompt.
+Context: The code is pasted inline, about 200 lines. Its language is [language]. The reader is [audience].
+Output format: Markdown. One overview paragraph, then one short section per major block. Max 400 words.
+Constraints: Name each function and its job. Flag unclear or risky parts. Say when unsure. No hype words.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, explanation. |
+| Added structure and word cap | "Explain this" has no shape rule. |
+| Added audience placeholder | Reader level is unknown. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

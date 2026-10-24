@@ -1,7 +1,34 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T11:58:06Z
+response_id: 6961f8d6-0679-45a6-a7bf-7b055ad8545d
 
-Format: plain text.
+<understood>
+You want a positive blog post announcing your new API.
+</understood>
 
+<not-sure>
+- What does the API do?
+- Audience: developers or general readers?
+- Length or platform limits?
+</not-sure>
+
+<draft>
 ```
-Describe the new API for a blog post. Audience: backend devs. List exactly 3 changes and each one's user benefit. No superlatives. Max 150 words.
+Task: Write a blog post announcing our new API.
+Context: The API does [what it does]. Audience is [developers / general readers].
+Output format: Markdown. One H1, three H2 sections, max 500 words.
+Constraints: State one concrete benefit per section. No hype words. Say when unsure. Do not invent features or numbers.
 ```
+</draft>
+
+<changes>
+| Change | Why |
+|---|---|
+| Profile ste80, format plain text | English request, blog announcement. |
+| Added section count and word cap | "Something nice" is not measurable. |
+| Added no-invented-facts rule | API details are missing. |
+</changes>
+
+<approval>
+Use this as-is, or should we change something first?
+</approval>

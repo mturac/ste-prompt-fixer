@@ -1,31 +1,32 @@
-status: unverified
+model: xiaomi/mimo-v2.6-pro
+timestamp: 2026-10-24T12:01:48Z
+response_id: 8ecdb395-319b-494d-b343-05b47e6696b7
 
 <understood>
-Müşteri destek ekibi için iade politikasını kısa ve net açıklayan bir metin istiyorsun.
+Müşteri destek ekibi için iade politikasını kısa ve net açıklatmak istiyorsun.
 </understood>
 
 <not-sure>
-- Süre ve koşullar: [politika maddeleri]
-- Kanal: e-posta veya yardım merkezi
+- İade politikasının metni veya kaynağı eksik.
+- Kanal: e-posta cevabı mı, bilgi bankası mı?
 </not-sure>
 
 <draft>
 ```
 Görev: Müşteri destek ekibi için iade politikasını açıkla.
-Bağlam: Metin destek ekibine yönelik. Süre ve koşullar: [politika maddeleri]. Kanal: [e-posta / yardım merkezi].
-Çıktı formatı: Düz metin. En fazla 5 madde. En fazla 120 kelime.
-Kısıtlar: Cümle başına en fazla 15 kelime. Emin olmadığın kuralı yazma. Teknik terimler İngilizce kalsın.
+Bağlam: Politika metni [iade politikası belgesi / bağlantı]. Hedef: destek ekibi.
+Çıktı formatı: Düz metin. En fazla 150 kelime. Kısa cümleler.
+Kısıtlar: Resmî dil kullan. Emin değilsen belirt. Kural uydurma. Süre ve tutar ver.
 ```
 </draft>
 
 <changes>
 | Change | Why |
 |---|---|
-| Varsayılan profil turkish | İstek Türkçe; profiles/turkish.md uygulanır |
-| Düz metin seçildi | Kısa bir açıklama; diyagram veya HTML gerekmez |
-| Madde ve kelime sınırı | "Kısa ve net" ölçülemez |
-| Rol satırı yok | Rol ek bir kısıt getirmiyor |
-| Süre ve kanal yer tutucu | İstekte bu bilgiler yok |
+| Profil turkish, format düz metin | Türkçe istek, kısa yanıt. |
+| Kelime sınırı eklendi | "Kisa ve net" ölçülebilir değildi. |
+| Politika kaynağı yer tutucu | Mesajda politika metni yok. |
+
 </changes>
 
 <approval>
