@@ -78,7 +78,8 @@ See CONTRIBUTING.md for what a good fixture must cover.
     expected skill behavior: keep the user's language. fixed (French): "Explique la difference entre git rebase et git merge. Un tableau, 5 lignes max. Seul ton en francais. Max 200 mots."
 
 18. bad: "List the breaking changes in v2.0. One bullet per change. Max 100 words. Cite the changelog file."
-    expected skill behavior: prompt is already good. Say so in one sentence. Do not invent problems.
+    profile: ste80
+    expected skill behavior: already-precise. Keep the original wording verbatim in the code block. Changes table says Kept as-is. Do not invent problems.
 
 19. bad: "prod dustu ne yapiyoruz acil"
     profile: tr + cte.
